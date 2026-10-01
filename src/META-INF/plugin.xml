@@ -1,0 +1,32 @@
+<idea-plugin>
+  <id>io.github.yaroslavlisovets.denotasks</id>
+  <name>Deno Tasks Runner</name>
+  <version>0.3.0</version>
+  <vendor url="https://github.com/YaroslavLisovets/webstorm-deno-tasks">Yaroslav Lisovets</vendor>
+  <idea-version since-build="262" until-build="262.*"/>
+
+  <description><![CDATA[
+    Adds green gutter run icons to tasks in <code>deno.json</code> / <code>deno.jsonc</code>,
+    just like scripts in <code>package.json</code>. Run executes <code>deno task &lt;name&gt;</code>;
+    Debug injects <code>--inspect-brk</code> into the task's <code>deno run|serve|test</code> command
+    and attaches the JavaScript debugger.
+    <p>Unofficial and fully vibe-coded: use at your own risk. Uninstall it once
+    <a href="https://youtrack.jetbrains.com/issue/WEB-61627">WEB-61627</a> is resolved.</p>
+  ]]></description>
+
+  <dependencies>
+    <plugin id="com.intellij.modules.json"/>
+    <plugin id="JavaScript"/>
+    <plugin id="JavaScriptDebugger"/>
+    <plugin id="deno"/>
+    <module name="intellij.json"/>
+    <module name="intellij.javascript.backend"/>
+    <module name="intellij.javascript.debugger.backend"/>
+  </dependencies>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <configurationType implementation="local.denotasks.DenoTaskConfigurationType"/>
+    <runConfigurationProducer implementation="local.denotasks.DenoTaskConfigurationProducer"/>
+    <runLineMarkerContributor language="JSON" implementationClass="local.denotasks.DenoTaskRunLineMarkerContributor"/>
+  </extensions>
+</idea-plugin>
